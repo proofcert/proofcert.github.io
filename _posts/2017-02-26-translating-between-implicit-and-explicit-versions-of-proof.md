@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Translating between implicit and explicit versions of proof
+excerpt_separator: <!--more-->
 ---
 
 This page organizes the supporting materials for the paper *Translating between
@@ -24,6 +25,8 @@ and Dale Miller. Materials are divided in three parts.
    elaboration that can be verified independently by the OCaml checker.
 
 A description of each part follows.
+
+<!--more-->
 
 ## λProlog checker and FPCs
 
