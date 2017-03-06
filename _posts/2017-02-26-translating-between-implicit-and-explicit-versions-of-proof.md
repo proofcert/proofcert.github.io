@@ -198,14 +198,20 @@ part ways with both features.
 It is presented pre-loaded with the maximally explicit certificate, enabling
 direct use with exported formulas and certificates produced by
 `resolution-elab` (see below), which emits code compatible with MaxChecker's
-formulas and the built-in maximal FPC. The user must complete two micro-modules,
-`Atom` and `Term`, each defining its corresponding type, and make a call to the
-kernel with a formula and a maximal certificate built from these types.
+formulas and the built-in maximal FPC. The user must complete two
+micro-modules, `Atom` and `Lkf_term`, each defining its corresponding type, and
+make a call to the kernel with a clean formula and maximal certificate built
+from these types.
 
 We illustrate this in the `Test` module, which includes placeholders to declare
 a (possibly exported) formula and certificate, and call the kernel, instantiated
 with the maximal FPC, on the pair, reporting the result. It can be built using
 the provided Makefile.
+
+{% highlight bash %}
+make
+./test.native
+{% endhighlight %}
 
 ## Prover9 certification
 
@@ -355,7 +361,7 @@ The process of certifying a Prover9 proof comprises three main steps.
     constructors and auxiliary clauses in the `resolution-elab` module. Map
     each proof step into the sets of clauses and justifications and define an
     `example` instance in `resolution-elab`. If MaxChecker is used, derive
-    identifiers and constructors to complete the `Atom` and `Term` type
+    identifiers and constructors to complete the `Atom` and `Lkf_term` type
     declarations.
 
  2. Execute `resolution-elab.mod` on the λProlog backend to certify the
@@ -363,9 +369,10 @@ The process of certifying a Prover9 proof comprises three main steps.
     `check_unordered` checks the certificate as given in the `example`; further
     exploration is possible.
 
- 3. If MaxChecker is used, solve goal `elab_and_export`, create an OCaml example
-    with the translated formula and certificate, and run the functional checker
-    to obtain an independent verification.
+ 3. If MaxChecker is used, solve goal `elab_and_export`, create an OCaml
+    example with the translated formula and certificate, and run the functional
+    checker to obtain an independent verification (i.e., complete the `Test`
+    module, build and execute).
 
 The sequence can be fully automated. A translation from Prover9 to either
 kernel should generate valid identifiers for each language, and particularly in
@@ -377,7 +384,27 @@ assumptions can be introduced at any point in the proof.
 
 The directory `~/transpiler` contains a small program that takes a clean proof
 (cf. `~/clean`) and generates code for both λProlog and OCaml kernels.
-Identifiers are suffixed `_p9`, thus ensuring the absence of name clashes.
+Identifiers are suffixed `_p9`, thus ensuring the absence of name clashes. To
+build it, use the provided Makefile and execute it on a clean proof.
+
+{% highlight bash %}
+make
+./transpiler.native ../clean/AGT001+1.p9
+{% endhighlight %}
+
+In this version, if the translator succeeds, output is given in lines of text.
+Each line constitutes a unit of code which can be plugged in its corresponding
+module.
+
+ * `type` declarations for λProlog atoms and terms, to be added to
+   `resolution-elab.sig`.
+
+ * λProlog auxiliary clauses (`pred_pname` and `size_bool` for atoms,
+   `fun_pname` and `size_term` for terms), to be added to
+   `resolution-elab.mod`.
+
+ * Atom and term constructors for MaxChecker's `Atom` and `Lkf_term` modules,
+   respectively, prefixed `%%atom%%` and `%%term%%`.
 
 ### Teyjus vs. ELPI
 
