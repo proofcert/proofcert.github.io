@@ -30,7 +30,7 @@ A description of each part follows.
 
 ## λProlog checker and FPCs
 
-Public repository.
+[Public repository.](https://github.com/proofcert/lkf-snapshot)
 
 First of all, a λProlog runtime must be chosen as the backend. We support
 directly two implementations: one more mature (Teyjus), another newer and
@@ -188,7 +188,7 @@ Prover9 proofs.
 
 ## OCaml maximal checker
 
-Public repository.
+[Public repository.](https://github.com/proofcert/maxchecker-snapshot)
 
 MaxChecker is a functional kernel, written in OCaml, that implements a
 determinate portion of the FPC framework, i.e., checking without backtracking
@@ -209,7 +209,7 @@ the provided Makefile.
 
 ## Prover9 certification
 
-Public repository.
+[Public repository.](https://github.com/proofcert/p9-snapshot)
 
 In this section, we describe how to check resolution proofs produced by an
 automated theorem prover, like Prover9, based on a resolution calculus. The
