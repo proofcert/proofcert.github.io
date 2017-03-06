@@ -385,7 +385,8 @@ assumptions can be introduced at any point in the proof.
 The directory `~/transpiler` contains a small program that takes a clean proof
 (cf. `~/clean`) and generates code for both λProlog and OCaml kernels.
 Identifiers are suffixed `_p9`, thus ensuring the absence of name clashes. To
-build it, use the provided Makefile and execute it on a clean proof.
+build it, use the provided Makefile and execute it on a clean proof, as in the
+example.
 
 {% highlight bash %}
 make
@@ -403,8 +404,8 @@ module.
    `fun_pname` and `size_term` for terms), to be added to
    `resolution-elab.mod`.
 
- * Atom and term constructors for MaxChecker's `Atom` and `Lkf_term` modules,
-   respectively, prefixed `%%atom%%` and `%%term%%`.
+ * OCaml atom and term constructors, prefixed `%%atom%%` and `%%term%%`,
+   respectively, to be added to MaxChecker's `Atom` and `Lkf_term` modules.
 
 ### Teyjus vs. ELPI
 
